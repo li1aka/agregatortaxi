@@ -1,0 +1,33 @@
+после подключения бд вставляем эти строчки в Model1.Context.cs
+
+private static taxiEntities _context;
+
+public static taxiEntities GetContext()
+        {
+            if (_context == null)
+                _context = new taxiEntities();
+            return _context;
+        }
+
+Пример как что и где выглядит:
+
+namespace Taxi
+{
+    using System;
+    using System.Data.Entity;
+    using System.Data.Entity.Infrastructure;
+    
+    public partial class taxiEntities : DbContext
+    {
+        private static taxiEntities _context;..............вот сюда строчку ебашим одну
+        public taxiEntities()
+            : base("name=taxiEntities")
+        {
+        }
+
+        public static taxiEntities GetContext().............вот сюда весь публик статик вставляем
+        {
+            if (_context == null)
+                _context = new taxiEntities();
+            return _context;
+        }
